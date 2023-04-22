@@ -6,9 +6,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.snackbar.Snackbar
 
 import com.ralvez.myapplicationlayout05.databinding.FragmentThirdBinding
 
@@ -16,7 +18,7 @@ import com.ralvez.myapplicationlayout05.databinding.FragmentThirdBinding
 class ThirdFragment : Fragment() {
 
     private lateinit var binding: FragmentThirdBinding
-    private lateinit var myAdapter: MyAdapter
+    private lateinit var myAdapter: ItemAdapter
     val myData = MyDataTest.myDataListOrder
 
 
@@ -25,13 +27,13 @@ class ThirdFragment : Fragment() {
         inflater: LayoutInflater,container: ViewGroup?,savedInstanceState: Bundle?):View? {
         binding = FragmentThirdBinding.inflate(inflater, container, false)
 
-        myAdapter = MyAdapter(myData)
+        val myAdapter=  ItemAdapter(myData) { position ->
+        }
 
-
-
+        binding.rvBooklist.adapter= myAdapter
+        binding.rvBooklist.layoutManager = LinearLayoutManager(activity)
         val recyclerView: RecyclerView = binding.rvBooklist
         recyclerView.adapter = myAdapter
-        binding.rvBooklist.layoutManager = LinearLayoutManager(activity)
 
         val swipeToDelete = object : SwipeToDelete(){
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {

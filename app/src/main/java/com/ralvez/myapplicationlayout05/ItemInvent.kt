@@ -5,6 +5,8 @@ object MyDataTest{
     var myDataListOrder: ArrayList<Item> = ArrayList()
     var myDataListSearch: ArrayList<Item> = ArrayList()
 
+    var myItemSelected: Int = 0
+
     fun test1(){
         myDataList.add(Item("Apple", 10))
         myDataList.add(Item("Grape", 20))

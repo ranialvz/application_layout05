@@ -22,7 +22,7 @@ var price = 0
 class FirstFragment : Fragment() {
 
     private lateinit var binding: FragmentFirstBinding
-    private lateinit var myAdapter: MyAdapter
+    private lateinit var myAdapter: ItemAdapter
     var myData = MyDataTest.myDataList
 
     override fun onCreateView(
@@ -30,11 +30,19 @@ class FirstFragment : Fragment() {
         binding = FragmentFirstBinding.inflate(inflater, container, false)
 
         MyDataTest.test1()
-        val myAdapter = MyAdapter(myData)
+
+
+
+        val myAdapter=  ItemAdapter(myData) { position ->
+        }
+
+        binding.rvBooklist.adapter= myAdapter
+        binding.rvBooklist.layoutManager = LinearLayoutManager(activity)
+
 
         val recyclerView: RecyclerView = binding.rvBooklist
         recyclerView.adapter = myAdapter
-        binding.rvBooklist.layoutManager = LinearLayoutManager(activity)
+
 
 
 
@@ -54,6 +62,7 @@ class FirstFragment : Fragment() {
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                 val position = viewHolder.adapterPosition
                 myData.removeAt(position)
+
                 recyclerView.adapter?.notifyItemRemoved(position)
             }
 
